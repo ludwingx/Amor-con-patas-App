@@ -1,0 +1,68 @@
+:root {
+    --xanthous: #e3b23cff;
+    --taupe: #463f3aff;
+    --light-green: #91f5adff;
+    --white: #ffffffff;
+    --vermilion: #dd403aff;
+}
+.navbar{
+    color: var(--taupe);
+    background-color: var(--xanthous);
+    .btn{
+        border: 0px;
+        background-color: var(--taupe);
+        margin: 5px;
+    }
+    .btn:hover{
+        background-color: var(--vermilion);
+    }
+}
+.navbar-nav .nav-link {
+    color: #000000; /* Cambia a tu color deseado */
+    
+}
+
+/* Si deseas cambiar el color del texto al pasar el mouse */
+.navbar-nav .nav-link:hover {
+    color:var(--vermilion); /* Cambia a tu color deseado al pasar el mouse */
+}
+
+/* Personaliza estilos adicionales aquí */
+body {
+    margin: 0;
+    padding: 0;
+}
+.hero-section {
+    height: 70vh; /* Ajusta la altura según tu preferencia */
+    position: relative;
+    overflow: hidden; /* Evita que el contenido se desborde */
+    padding: 20px;
+    color: white;
+}
+
+.hero-section::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('https://www.friendbank.net/ContentImageHandler.ashx?ImageId=156937');
+    background-size: cover;
+    background-position: center top;
+    filter: brightness(0.7);
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+.second-section {
+    background-color: var(--xanthous); /* Color de fondo */
+    padding: 30px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+}
+
+.second-section h1 {
+    font-size: 24px; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+    line-height: 1.6; /* Altura de línea para mejorar la legibilidad */
+}

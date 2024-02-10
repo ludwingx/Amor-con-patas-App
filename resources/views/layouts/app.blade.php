@@ -11,9 +11,7 @@
 
 <body>
     @include('layouts.navbar')
-    <div class="container">
-        @yield('content')
-    </div>
+    @yield('content')
 </body>
     @include('include.scripts')
 </html>
