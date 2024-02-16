@@ -1,28 +1,33 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\ControllerLogin;
+use App\Http\Controllers\ControllerPrincipal;
+use App\Http\Controllers\ControllerUsers;
 
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/home', function () {
+Route::get('home', function () {
     return view('home');
 });
+Route::get('login', function () {
+    return view('auth.login');
+})->name('login');
 
 
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'login_action'])->name('login.action');
-Route::get('register', [AuthController::class, 'register'])->name('register');
-Route::post('register', [AuthController::class, 'register_action'])->name('register.action');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+//user
+Route::get('logout', [ControllerLogin::class, 'logout']);
+Route::get('ingreso', [ControllerLogin::class, 'clogin']);
+Route::get('registro',[ControllerLogin::class,'cregistro']);
+Route::post('validarlogin',[ControllerLogin::class,'validarUsuario']);
+Route::get('principal',[ControllerPrincipal::class,'principal']);
+Route::get('/userslist', [ControllerUsers::class, 'listaUsuarios']);
+Route::post('newUser', [ControllerUsers::class, 'addUser']);
+
+//adopciones
+Route::get('adopciones', function () {
+    return view('layouts.adopciones');
+})->name('adopciones');
+
+

@@ -1,3 +1,4 @@
+
 :root {
     --xanthous: #e3b23cff;
     --taupe: #463f3aff;
@@ -5,6 +6,7 @@
     --white: #ffffffff;
     --vermilion: #dd403aff;
 }
+
 .navbar{
     color: var(--taupe);
     background-color: var(--xanthous);
@@ -13,6 +15,9 @@
         height: 70px;
         margin-left: 25px;
         margin-right: 25px;
+    }
+    .usernameText{
+        color: var(--vermilion);
     }
     .btn{
         border: 0px;
@@ -126,5 +131,52 @@ body {
         .card{
             width: 18rem;
         }
+    }
+}
+.fifth-section{
+    background-color: var(--white);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    h1{
+        font-size: 45px;
+    }
+    p{
+        font-size: 22px;
+    }
+    .btn{
+        border: 0px;
+        background-color: var(--taupe);
+        margin: 5px;
+        padding: 10px 40px;
+        font-size: 20px;
+    }
+    .btn:hover{
+        background-color: var(--vermilion);
+    }
+}
+/*footer*/
+footer{
+    background-color: var(--xanthous);
+    color: var(--taupe);
+    a{
+        color: var(--taupe);
+        text-decoration: none;
+        
+    }
+    a:hover{
+        color: var(--vermilion);
+    }
+}
+/*login*/
+.loginContainer{
+    background-color: var(--white);
+    padding-bottom: 80px;
+    .btn{
+        border: 0px;
+        background-color: var(--taupe);
+
+    }
+    .btn:hover{
+        background-color: var(--vermilion);
     }
 }
