@@ -28,3 +28,23 @@ function savePet(){
         }
     })
 }
+
+$(document).ready(function () {
+    // Cargar mascotas al cargar la página
+    loadPets();
+
+    function loadPets() {
+        $.ajax({
+            url: '{{ route("adoptions.pets") }}',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                // Renderizar la vista parcial con las mascotas
+                $('pets').html(response.html);
+            },
+            error: function (error) {
+                console.error('Error al cargar las mascotas:', error);
+            }
+        });
+    }
+});

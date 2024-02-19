@@ -180,3 +180,9 @@ footer{
         background-color: var(--vermilion);
     }
 }
+.adopciones{
+    .filtro-container{
+        padding: 20px 200px;
+
+    }
+}
