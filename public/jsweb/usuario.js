@@ -1,8 +1,8 @@
-function jugadoreslist(opcion)
+function jsUserList(opcion)
 {
     var type = "GET"; 
     var formData = {'opcion':opcion }; 
-    var ruta='listarJugadores';
+    var ruta='ruserlist';    
     $.ajax({
         type: type,
         url: ruta,
@@ -16,14 +16,13 @@ function jugadoreslist(opcion)
             }
             else
             { 
-                if (opcion=='principal')
+                if (opcion=='pprincipal')
                 { 
-                    
-                    $('#pprincipal').empty().append($(data));
-                      
+                    $('#pprincipal').empty().append($(data));  
+                    $('#loadingESPERE').hide();
                 }                 
-                else {
-                    $('#paneldetalle').empty().append($(data));  
+                else{
+                    $('#paneldetalle').empty().append($(data)); 
                 }
             }
           

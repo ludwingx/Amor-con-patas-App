@@ -1,9 +1,9 @@
-function savePet(){
-    var type='POST';
-    var nombrep=document.getElementById('nombrep').value;
-    var specie=document.getElementById('specie').value;
-    
-    var formData={'nombrep':nombrep};
+function savePet() {
+    var type = 'POST';
+    var nombrep = document.getElementById('nombrep').value;
+    var specie = document.getElementById('specie').value;
+
+    var formData = { 'nombrep': nombrep };
 
     var ruta = 'savepet';
 
@@ -15,36 +15,78 @@ function savePet(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        sucess:function(data){
-            if(data.mensaje=="exito"){
+        sucess: function (data) {
+            if (data.mensaje == "exito") {
                 listPets('principal');
 
-            }if(data.mensaje=="sinusuario"){
-                window.location.href=window.location.origin+'/login';
+            } if (data.mensaje == "sinusuario") {
+                window.location.href = window.location.origin + '/login';
             }
         },
-        error:function(data){
+        error: function (data) {
             console.log(data);
         }
     })
 }
-
-$(document).ready(function () {
-    // Cargar mascotas al cargar la página
-    loadPets();
-
-    function loadPets() {
-        $.ajax({
-            url: '{{ route("adoptions.pets") }}',
-            type: 'GET',
-            dataType: 'json',
-            success: function (response) {
-                // Renderizar la vista parcial con las mascotas
-                $('pets').html(response.html);
-            },
-            error: function (error) {
-                console.error('Error al cargar las mascotas:', error);
+function jsShowAdoptionList(opcion) {
+    var type = "GET";
+    var formData = {'opcion':opcion }; 
+    var ruta = 'rShowAdoptionList';
+    $.ajax({
+        type: type,
+        url: ruta,
+        data: formData,
+        dataType: "JSON",
+        success: function (data) {
+            var ldato = data[0];
+            if (ldato.mensaje == 'sinusuario') {
+                window.location.href = window.location.origin + '/login';
             }
-        });
-    }
-});
+            else {
+                //console.log(data);
+                if (opcion == 'adopciones') {
+                    $('#pprincipal').empty().append($(data));
+
+                }
+                else {
+                    $('#paneldetalle').empty().append($(data));
+                }
+            }
+
+        },
+        error: function (data) {
+            console.log(data);
+        }
+
+    });
+}
+
+function jsProfilePet(Request, $request,$id) {
+    var type = "GET";
+    var formData = { 'id': $id };
+    var ruta = 'profile-pet';
+
+    $.ajax({
+        type: type,
+        url: ruta,
+        data: formData,
+        dataType: "JSON",
+        success: function (data) {
+
+            var ldato = data[0];
+            if (ldato.mensaje == 'sinusuario') {
+                window.location.href = window.location.origin + '/login';
+            }
+            else {
+                //console.log(data);
+                if (opcion == 'principal') {
+                    $('#pprincipal').empty().append($(data));
+
+                }
+                else {
+                    $('#paneldetalle').empty().append($(data));
+                }
+            }
+        }
+    })
+}

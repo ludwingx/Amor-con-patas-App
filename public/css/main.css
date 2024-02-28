@@ -6,10 +6,23 @@
     --white: #ffffffff;
     --vermilion: #dd403aff;
 }
+.containerHome{
+    padding: 10px 50px;
 
+}
 .navbar{
-    color: var(--taupe);
     background-color: var(--xanthous);
+    .navbar-toggler{
+        border: 0px;
+
+        background-color: var(--taupe);
+        color: var(--vermilion);
+    }.navbar-toggler:hover{
+        background-color: var(--vermilion);
+        color: var(--taupe);
+    }
+    color: var(--taupe);
+    
     .logoNavbar{
         width: 90px;
         height: 70px;
@@ -38,11 +51,6 @@
     color:var(--vermilion); /* Cambia a tu color deseado al pasar el mouse */
 }
 
-/* Personaliza estilos adicionales aquí */
-body {
-    margin: 0;
-    padding: 0;
-}
 .hero-section {
     height: 90vh; /* Ajusta la altura según tu preferencia */
     position: relative;
@@ -156,6 +164,7 @@ body {
 }
 /*footer*/
 footer{
+    
     background-color: var(--xanthous);
     color: var(--taupe);
     a{
@@ -185,4 +194,77 @@ footer{
         padding: 20px 200px;
 
     }
+    .petCard{
+        .card {
+            /* Estilos predeterminados para la tarjeta */
+            border: 3px solid #ccc;
+            transition: border-color 0.3s ease-in-out;
+            text-decoration: none; /* Elimina el subrayado predeterminado del enlace */
+            color: inherit; /* Hereda el color del texto del contenedor padre */
+        }
+        .card-img{
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease-in-out;
+        }
+        .card-img:hover{
+            border-color: var(--xanthous);
+
+        }
+        .card:hover {
+            /* Estilos cuando el mouse está sobre la tarjeta */
+            border-color: var(--xanthous); /* Puedes cambiar esto al color que desees */
+            .card-title{
+                color: var(--vermilion);
+            }
+        }
+    }
 }
+
+.petContainer{
+    
+    padding: 30px;
+    .petImg{
+        width: 100%;
+        height: 100%;
+        max-width: 400px;
+        object-fit: cover;
+    }
+    .btn{
+        border: 0px;
+        background-color: var(--taupe);
+        margin: 5px;
+    }
+    .btn:hover{
+        background-color: var(--vermilion);
+    }
+}
+
+.bodyAdoption{
+    background-color: var(--taupe);
+    color: white;
+
+    .petCol{
+        .petName{
+            font-size: 24px;
+        }
+        .petAge{
+            font-size: 18px;
+        }
+    }
+    .btn{
+
+        color: #000000;
+        border: 0px;
+        background-color: var(--light-green);
+        margin-top: 20px;
+
+    }.btn:hover{
+        background-color: var(--vermilion);
+
+    }
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    content: " / ";
+}
+
+

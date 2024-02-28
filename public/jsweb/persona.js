@@ -4,8 +4,8 @@ function listadePersonas(opcion)
 
     var formData = {'opcion':opcion };
    
-    var ruta='listarpersona';
-    $('#loadingESPERE').show();
+    var ruta='ruserlista';
+    
     
     $.ajax({
         type: type,
@@ -21,10 +21,10 @@ function listadePersonas(opcion)
             else
             {
                  //console.log(data);
-                if (opcion=='principal')
+                if (opcion=='home')
                 { 
                     $('#pprincipal').empty().append($(data));  
-                    $('#loadingESPERE').hide();
+                    
                 }                 
                 else{
                     $('#paneldetalle').empty().append($(data)); 

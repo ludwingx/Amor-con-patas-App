@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <!-- Required meta tags -->
@@ -10,10 +10,13 @@
     <title>app</title>
 </head>
 
-<body>
+<body >
     @include('layouts.navbar')
     @yield('content')
     @include('layouts.footer')
-</body>
+
+    <!-- Scripts al final del cuerpo del documento -->
     @include('include.scripts')
+</body>
+
 </html>

@@ -6,7 +6,7 @@ function validarcampos(){
     otromensaje='';
 
     if (email==''){ 
-        mensaje='Este valor no puede estar VacÃ­o'+' <br> ';
+        mensaje='Este valor no puede estar Vacio'+' <br> ';
        
     }
 
@@ -59,10 +59,15 @@ function validarLogin(email,password){
         },
         success:function(data){
 
-                console.log(data);
-
-                if (data.mensaje=="exito"){
-                    window.location.href=window.location.origin+'/home';
+               if (data.mensaje === "exito") {
+                // Verifica el rol del usuario y redirige en consecuencia
+                if (data.rol === "admin") {
+                    window.location.href = window.location.origin + '/principal';
+                } else if (data.rol === "user") {
+                    window.location.href = window.location.origin + '/home';
+                } else {
+                    // Rol desconocido o manejar según sea necesario
+                }
                 }
 
         },
@@ -109,7 +114,7 @@ function cerrarSesion() {
 
 function createUser(){
     var type = "POST";
-    user=document.getElementById('user').value;
+    name=document.getElementById('name').value;
     password=document.getElementById('password').value;
     email=document.getElementById('email').value;
     var formData = {
@@ -126,10 +131,12 @@ function createUser(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data) {
-            console.log(data);
+            console.log(data); 
 
             if(data.mensaje=="exito"){
-                window.location.href=window.location.origin+'/home';
+                
+                window.location.href=window.location.origin+'/principal';
+                alert('USUARIO CREADO CORRECTAMENTE');
             }
         },
         error: function (data) {
