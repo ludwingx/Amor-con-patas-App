@@ -51,8 +51,10 @@ Route::post('/adoption-form/{id}',[ControllerAdoption::class, 'form'])->name('ad
 //pets
 Route::get('/pet/{id}',  [ControllerPets::class, 'show'])->name('pet.show');
 //adopcion
-Route::get('/adoption/{id}',  [ControllerAdoption::class, 'form'])->name('adoption.form');
+Route::get('adoptionForm',  [ControllerAdoption::class, 'cAdoptionForm']);
 Route::get('saveAdopt', [ControllerAdoption::class, 'saveAdopt']);
+
+Route::get('profile-pet',[ControllerPets::class, 'cProfilePet']);
 //pdf
 Route::get('pdfpets',  [ControllerPets::class, 'cexportlistpdf']);
 
@@ -61,3 +63,6 @@ Route::get('agregarmascota', [ControllerMascota::class, 'cNuevaMascota']);
 Route::post('newMascota',[ControllerMascota::class, 'agregarMascota']);
 Route::get('filtrarMascotas', [ControllerMascota::class, 'filtrarMascotas']);
 Route::get('rEditarMascota', [ControllerMascota::class, 'cEditarMascota']);
+
+Route::post('updateEditPet', [ControllerMascota::class, 'updateEditPet']);
+Route::post('rDesactivarMascota', [ControllerMascota::class, 'cDesactivarMascota']);

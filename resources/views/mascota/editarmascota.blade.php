@@ -1,6 +1,6 @@
 @section('Cargadato')
 
-    <div class="container">
+    <div class="container containerEditPet">
         <div class="row">
             <div class="col">
                 <nav aria-label="breadcrumb">
@@ -12,57 +12,74 @@
                 </nav>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <h1>Editar Mascota</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <h4>Estado</h3>
-                <select class="form-select form-control" id="edestado" onchange="filtrarMascotas('principal')">
-                    <option value="todos">Todos</option>
-                    <option value="activo">Activos</option>
-                    <option value="desactivado">Desactivados</option>
-                </select>
-            </div>
-            <div class="col-3">
-                <h4>Tipo</h3>
-                <select class="form-select form-control" id="edtipo" onchange="filtrarMascotas('principal')">
-                    <option value="todos">Todos</option>
-                    <option value="gatos">Gatos</option>
-                    <option value="perros">Perros</option>
-                    <option value="aves">Aves</option>
-                </select>
-            </div>
-            <div class="col-3">
-                <h4>Raza</h3>
-                <select name="raza" class="form-select" id="edraza">
-                    @foreach ($lraza as $listaraza)
-                        <option value="{{ $listaraza->nombre_rz }}">{{ $listaraza->nombre_rz }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-3">
-                <h4>Propietario</h3>
-                    <select name="raza" class="form-select" id="edp">
-                        @foreach ($lpersona as $listap)
-                            <option value="{{ $listap->id }}">{{ $listap->name }}</option>
-                        @endforeach
-                    </select>
-            </div>
-        </div>
+        
+
 
         @foreach ($datosmascota as $dmascota)
-            <div class="row">
-                <di class="col-6">
-                    <label for="">Id: {{ $dmascota->cod_mt }}</label>
+        <div class="row">
+            <div class="col-8">
+                <h1>Editar Mascota</h1>
+            </div>
+            <div class="col-auto d-flex justify-content-end">
+                <button type="button" class="btn btn-success me-2" onclick="updateEditPet({{ $dmascota->cod_mt }})">Guardar</button>
+                <button type="button" class="btn btn-danger me-2" onclick="jsListarMascota('principal')">Cancelar</button>
+            </div>
+        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <h3>{{ $dmascota->nombre_mt }}</h3>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col d-flex justify-content-center">
+                        
+                        <img class="roundPhotoPetEdit" src="https://randomuser.me/api/portraits/women/20.jpg" alt="user" />
+                    </div>
+                </div>
+                <h4>Datos de la mascota:</h4>
+                <div class="row mt-3">
+                    <di class="col-6">
+                        <label for="" class="form-label">Nombre de mascota:</label>
+                        <input class="form-control" type="text" name="nombre_mt" id="nombre_mt" value=" {{ $dmascota->nombre_mt }}">
+                    </di>
+                    <div class="col-6">
+                        <label for="" class="form-label">Raza:</label>
+                        <select name="raza" class="form-select" id="raza_mt" >
+                            @foreach ($lraza as $listaraza)
+                            <option value="{{ $listaraza->nombre_rz }}" @if ($listaraza->nombre_rz == $razaActualNombre) selected @endif>
+                                {{ $listaraza->nombre_rz }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                </di>
-                <di class="col-6">
-                    <label for="">Nombre de mascota</label>
-                    <input type="text" name="ednom" id="ednom" value=" {{ $dmascota->nombre_mt }}">
-                </di>
+                    <div class="col-6">
+                        <label for="" class="form-label">Tipo:</label>
+                        <select name="tipo" class="form-select" id="idTipo">
+                            @foreach ($ltipo as $listatipo)
+                            <option value="{{ $listatipo->id }}" @if ($listatipo->id == $tipoActualNombre) selected @endif>
+                                {{ $listatipo->nombre_tipo }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="form-label">Propietario:</label>
+                            <select class="form-select form-control" name="propietario" id="idper">
+                                @foreach ($lpersona as $listaper)
+                                <option value="{{ $listaper->id }}" @if ($listaper->id == $propietarioActualId) selected @endif>
+                                    {{ $listaper->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="namepet" class="form-label">Detalle/Observación</label>
+                        <input type="text" class="form-control" id="detalle_mt" value="{{ $dmascota->detalle_mt }}"  placeholder="Detalles">
+                    </div>
+
+                </div>
             </div>
         @endforeach
 

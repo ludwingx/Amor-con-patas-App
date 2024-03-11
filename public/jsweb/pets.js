@@ -61,9 +61,9 @@ function jsShowAdoptionList(opcion) {
     });
 }
 
-function jsProfilePet(Request, $request,$id) {
+function jsProfilePet(id) {
     var type = "GET";
-    var formData = { 'id': $id };
+    var formData = { 'id': id };
     var ruta = 'profile-pet';
 
     $.ajax({
@@ -72,21 +72,18 @@ function jsProfilePet(Request, $request,$id) {
         data: formData,
         dataType: "JSON",
         success: function (data) {
-
             var ldato = data[0];
             if (ldato.mensaje == 'sinusuario') {
                 window.location.href = window.location.origin + '/login';
             }
-            else {
-                //console.log(data);
-                if (opcion == 'principal') {
-                    $('#pprincipal').empty().append($(data));
+            else{
+                $('#pprincipal').empty().append(data);
 
-                }
-                else {
-                    $('#paneldetalle').empty().append($(data));
-                }
             }
+        },
+        error: function (data) {
+            console.log(data);
         }
     })
 }
+

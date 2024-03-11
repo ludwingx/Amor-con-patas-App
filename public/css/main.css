@@ -266,5 +266,19 @@ footer{
 .breadcrumb-item + .breadcrumb-item::before {
     content: " / ";
 }
-
-
+.containerEditPet{
+    padding-bottom: 100px;
+}
+.roundPhotoPetEdit {
+	border: 1px solid #03BFCB;
+	border-radius: 50%;
+	padding: 7px;
+    /*aumentame el tamaño de forma responsiva*/
+    width: 200px;
+}
+.modal {
+    z-index: 1050; /* o un valor superior según sea necesario */
+}
+.modal-content {
+    width: 100%; /* O el ancho deseado para tu modal */
+}

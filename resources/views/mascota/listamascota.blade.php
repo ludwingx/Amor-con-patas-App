@@ -1,4 +1,6 @@
 @section('Cargadato')
+
+  
 <div class="container containerListMascotas">
     <div class="row">
         <div class="col">
@@ -11,87 +13,50 @@
         </div>
     </div>
     <h2><i class="fa-solid fa-paw"></i> Gestión de Mascotas </h2>
-
-    {{-- Agrega cualquier formulario o botón necesario para gestionar las mascotas --}}
-    <div class="row ">
-        <div class="col text-end">
-            <button type="button" class="btn btn-outline-danger" ">PDF</button>
-            <button type="button" class="btn btn-outline-success" onclick="nuevaMascota('accion')">Agregar Mascota</button>
-        </div>
-
-    </div>
     <div class="row">
         <div class="col-3">
             <h4>Estado</h3>
-            <select class="form-select form-control" id="edestado" onchange="filtrarMascotas('principal')">
+            <select class="form-select form-control" id="estado_mt" onchange="filtrarMascotas()">
+
                 <option value="todos">Todos</option>
                 <option value="activo">Activos</option>
-                <option value="desactivado">Desactivados</option>
+                <option value="desactivo">Desactivados</option>
             </select>
         </div>
         <div class="col-3">
             <h4>Tipo</h3>
-            <select class="form-select form-control" id="edtipo" onchange="filtrarMascotas('principal')">
+            <select class="form-select form-control" id="ftipo"  onchange="filtrarMascotas()">
                 <option value="todos">Todos</option>
-                <option value="gatos">Gatos</option>
-                <option value="perros">Perros</option>
-                <option value="aves">Aves</option>
+                @foreach ($ltipo as $listatipo)
+                    <option value="{{ $listatipo->id}}">{{ $listatipo->nombre_tipo }}</option>
+                @endforeach
             </select>
         </div>
         <div class="col-3">
             <h4>Raza</h3>
-            <select name="raza" class="form-select" id="edraza">
+            <select name="raza" class="form-select" id="fraza"  onchange="filtrarMascotas()">
+                <option value="todos">Todos</option>
                 @foreach ($lraza as $listaraza)
-                    <option value="{{ $listaraza->nombre_rz }}">{{ $listaraza->nombre_rz }}</option>
+                    <option value="{{ $listaraza->cod_rz }}">{{ $listaraza->nombre_rz }}</option>
                 @endforeach
             </select>
         </div>
         <div class="col-3">
             <h4>Propietario</h3>
-            <input type="text" name="edbusca" id="edbusca" placeholder="Buscar">
+            <input type="text" name="edbusca" id="fpropietario" placeholder="Buscar"  onchange="filtrarMascotas()">
         </div>
-    </div>
 
-    <div class="row mt-3">
-        <div class="col">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Raza</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Propietario</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Configuraciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($lmascotas as $listap)
-                        <tr>
-                            <td>{{ $listap->cod_mt }}</td>
-                            <td>{{ $listap->nombre_mt }}</td>
-                            <td>{{ $listap->raza_mt }}</td>
-                            <td>{{ $listap->tipo_mt }}</td>
-                            <td>{{ $listap->name }}</td>
-                            <td>{{ $listap->estado_mt }}</td>
-                            <td> 
-                                <button type="button" class="btn btn-outline-primary" 
-                                    onclick="jsEditarMascota( {{ $listap->cod_mt }})">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-danger" 
-                                onclick="jsEliminarMascota({{ $listap->cod_mt }})">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
-                            </td>
-                            {{-- Agrega más detalles según tus necesidades --}}
-                        </tr>
-
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="row ">
+            <div class="col text-end">
+                <button type="button" class="btn btn-outline-danger" ">PDF</button>
+                <button type="button" class="btn btn-outline-success" onclick="nuevaMascota('accion')">Agregar Mascota</button>
+            </div>
+    
         </div>
+
     </div>
+</div>
+<div id="paneldetalle">
+
 </div>
 @endsection

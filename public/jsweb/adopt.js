@@ -1,20 +1,27 @@
 function adoptionForm(id) {
-    var type = 'GET';
-    var formdata={'id':id};
+    var type = "GET";
+    var formData = { 'id': id };
     var ruta = 'adoptionForm';
 
     $.ajax({
         type: type,
         url: ruta,
-        data: formdata,
-        dataType: 'JSON',
-        headers: {
-            
+        data: formData,
+        dataType: "JSON",
+        success: function (data) {
+            var ldato = data[0];
+            if (ldato.mensaje == 'sinusuario') {
+                window.location.href = window.location.origin + '/login';
+            }
+            else{
+                $('#pprincipal').empty().append(data);
+
+            }
+        },
+        error: function (data) {
+            console.log(data);
         }
     })
-    window.location.href = window.location.origin + '/adoption/' + id;
-
-
 }
 function adopt() {
     var type = 'POST';

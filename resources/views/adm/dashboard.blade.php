@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <title>Dashboard</title>
     @include('include.styles')
 </head>
@@ -24,7 +26,7 @@
         --white-color: var(--white);
         --body-font: 'Nunito', sans-serif;
         --normal-font-size: 1rem;
-        --z-fixed: 100
+
     }
 
     *,
@@ -34,7 +36,7 @@
     }
 
     body {
-        position: relative;
+
         margin: var(--header-height) 0 0 0;
         padding: 0 1rem;
         font-family: var(--body-font);
@@ -57,7 +59,7 @@
         justify-content: space-between;
         padding: 0 1rem;
         background-color: var(--white-color);
-        z-index: var(--z-fixed);
+
         transition: .5s
     }
 
@@ -83,13 +85,13 @@
     .l-navbar {
         position: fixed;
         top: 0;
-        left: -30%;
+        left: 0;
         width: var(--nav-width);
         height: 100vh;
         background-color: var(--first-color);
         padding: .5rem 1rem 0 0;
         transition: .5s;
-        z-index: var(--z-fixed)
+
     }
 
     .nav {
@@ -141,7 +143,8 @@
     }
 
     .show {
-        left: 0
+        left: 0;
+
     }
 
     .body-pd {
@@ -161,9 +164,6 @@
         background-color: var(--vermilion)
     }
 
-    .height-100 {
-        height: 100vh
-    }
 
     @media screen and (min-width: 768px) {
         body {
@@ -186,6 +186,7 @@
         }
 
         .l-navbar {
+            
             left: 0;
             padding: 1rem 1rem 0 0
         }
@@ -193,76 +194,99 @@
         .show {
             width: calc(var(--nav-width) + 156px)
         }
-
         .body-pd {
             padding-left: calc(var(--nav-width) + 188px)
         }
     }
+
+    
 </style>
-
-<body id="body-pd">
-    <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
-    </header>
-    <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div> 
-                <a href="#" class="nav_logo"> 
-                    <i class='nav_icon'> <img src="{{ asset('assets/logo.png')}}" style="max-width:1.5rem" alt=""></i>
-                    <span class="nav_logo-name">Amor con patas</span>
-                </a>
-                <div class="nav_list"> 
-                    <a href="#" class="nav_link">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="nav_name fw-bold m-2"> {{Session::get('usuariologin')['name'] }}</span>
-                    </a>
+<body>
+    <!-- Modal fuera de la barra lateral -->
+    <div class="modal fade modal-fullscreen" id="notificationModal" tabindex="-1000"  role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <hr>
-                <div class="nav_list">
-                    <a href="principal" class="nav_link active" > 
-                        <i class="fa-solid fa-chart-line"></i> 
-                        <span class="nav_name">Dashboard</span> 
-                    </a>
-                    <a href="#" class="nav_link" onclick="jsUserList('principal')"> 
-                        <i class="fa-solid fa-users"></i>
-                        <span class="nav_name">Users</span> 
-                    </a>
-                    <a href="#" class="nav_link" onclick="jugadoreslist('principal')"> 
-                        <i class="fa-solid fa-futbol"></i>
-                        <span class="nav_name">Jugadores</span> 
-                    </a>
-                    <a href="#" class="nav_link" onclick="jsListarMascota('principal')"> 
-                        <i class="fa-solid fa-paw"></i> 
-                        <span class="nav_name" >Mascotas</span> 
-                    </a>
-
-                    <a class="nav_link" href="home">
-                        <i class='bx bx-home nav_icon'></i>
-                        <span class="nav_name">Vista Publica</span> 
-                    </a>
-                    <hr>
-                </div>
-
-                <br>
-
-                <div class="nav_list">
-                    <a  class="nav_link" href="#"  onclick="cerrarSesion()" > 
-                        <i class='bx bx-log-out nav_icon'></i> 
-                        <span class="nav_name">Cerrar Sesión</span>
-                    </a>
+                <div class="modal-body">
+                    <p id="notificationText"></p>
                 </div>
             </div>
-        </nav>
+        </div>
     </div>
-    <!--Container Main start-->
-    <div class="height-100 bg-light" >
-        @yield('content')
+    <div  class="height-100 bg-light content-container">
+        <div id="body-pd">
+        
+            <header class="header" id="header">
+                <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+                <div class="header_img">  </div>
+            </header>
+            <div class="l-navbar " id="nav-bar">
+                <nav class="nav">
+                    <div> 
+                        <a href="#" class="nav_logo"> 
+                            <i class='nav_icon'> <img src="{{ asset('assets/logo.png')}}" style="max-width:1.5rem" alt=""></i>
+                            <span class="nav_logo-name">Amor con patas</span>
+                        </a>
+                        <div class="nav_list"> 
+                            <a href="#" class="nav_link">
+                                <i class="fa-solid fa-user"></i>
+                                <span class="nav_name fw-bold m-2"> {{Session::get('usuariologin')['name'] }}</span>
+                            </a>
+                        </div>
+                        <hr>
+                        <div class="nav_list">
+                            <a href="principal" class="nav_link active" > 
+                                <i class="fa-solid fa-chart-line"></i> 
+                                <span class="nav_name">Dashboard</span> 
+                            </a>
+                            <a href="#" class="nav_link" onclick="jsUserList('principal')"> 
+                                <i class="fa-solid fa-users"></i>
+                                <span class="nav_name">Users</span> 
+                            </a>
+                            <a href="#" class="nav_link" onclick="jugadoreslist('principal')"> 
+                                <i class="fa-solid fa-futbol"></i>
+                                <span class="nav_name">Jugadores</span> 
+                            </a>
+                            <a href="#" class="nav_link" onclick="jsListarMascota('principal')"> 
+                                <i class="fa-solid fa-paw"></i> 
+                                <span class="nav_name" >Mascotas</span> 
+                            </a>
+        
+                            <a class="nav_link" href="home">
+                                <i class='bx bx-home nav_icon'></i>
+                                <span class="nav_name">Vista Publica</span> 
+                            </a>
+                            <hr>
+                        </div>
+        
+                        <br>
+        
+                        <div class="nav_list">
+                            <a  class="nav_link" href="#"  onclick="cerrarSesion()" > 
+                                <i class='bx bx-log-out nav_icon'></i> 
+                                <span class="nav_name">Cerrar Sesión</span>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div id="dynamic-content">
+                @yield('content')
+            </div>
+        </div>
+            
+    
     </div>
-    <!--Container Main end-->
    
-</body>
+
+
+</body> 
+
+
 @include('include.scripts')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 </html>

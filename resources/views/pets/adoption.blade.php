@@ -1,3 +1,4 @@
+@section('Cargadato')
 <div class="container">
     <br>
     <br>
@@ -95,3 +96,5 @@
 @include('include.scripts')
 </body>
 </html>
+
+@endsection

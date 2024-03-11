@@ -27,19 +27,18 @@
                     <div class="row">
                         <div class="col-3">
                             <h4>Estado</h3>
-                            <select class="form-select form-control"id="estado_mt" >
+                            <select class="form-select form-control" id="estado_mt" >
                                 <option value="todos">Todos</option>
                                 <option value="activo">Activos</option>
-                                <option value="desactivado">Desactivados</option>
+                                <option value="desactivo">Desactivados</option>
                             </select>
                         </div>
                         <div class="col-3">
                             <h4>Tipo</h3>
                             <select class="form-select form-control" id="tipo_mt" >
-                                <option value="todos">Todos</option>
-                                <option value="gatos">Gatos</option>
-                                <option value="perros">Perros</option>
-                                <option value="aves">Aves</option>
+                                @foreach ($ltipo as $listatipo)
+                                <option value="{{ $listatipo->id }}">{{ $listatipo->nombre_tipo }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-3">

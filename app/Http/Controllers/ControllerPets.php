@@ -43,7 +43,26 @@ class ControllerPets extends Controller
         }
        
     }
+    public function cProfilePet(Request $request) {
 
+        $id = $request->id;
+        
+        if (session()->has("usuariologin")) {
+            $conexiondb = 'amor_con_patas';
+           
+    
+            $dataMascota = DB::connection($conexiondb)->select('select * from pets where id=?', [$id]);
+            
+    
+            $view = View::make('pets.pet')
+                ->with('datosmascota', $dataMascota);
+               
+    
+            $sections = $view->renderSections();
+    
+            return Response::json($sections['Cargadato']);
+        }
+    }
     public function cexportlistpdf(){
         $titulo = "Listado de mascotas";
         $pdf = PDF::loadView('enclases.pdfpets',['titulo'=>$titulo])->setpaper('letter', 'landscape');
